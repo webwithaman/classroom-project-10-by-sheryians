@@ -78,6 +78,8 @@ body {
 
 .boxes div:first-child {
   background-color: #2e85cc;
+  background-color: #095da1;
+  background-color: #61b8ff;
 }
 
 .boxes div:last-child {
