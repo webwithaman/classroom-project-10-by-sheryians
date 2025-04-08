@@ -12,10 +12,6 @@
   html {
     font-size: 40%;
   }
-
-  :root {
-    --padding: 1.2rem;
-  }
 }
 
 @media (max-width: 180px) {
@@ -24,17 +20,17 @@
   }
 
   html {
-    font-size: 27%;
+    font-size: 18%;
   }
 }
 
-@media (min-width: 400px) {
-  main {
-    padding: var(--padding);
+@media (min-width: 500px) {
+  .boxes div {
+    min-width: 10rem;
   }
-
-  .posts-container {
-    border-radius: 1rem;
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   }
 }
 
@@ -42,21 +38,9 @@
   html {
     font-size: 64%;
   }
-
-  .navbar {
-    flex-direction: row;
-    justify-content: space-between;
-  }
 }
 
 @media (min-width: 1200px) {
-  :root {
-    --padding: 2rem;
-  }
-
-  .logo {
-    width: 24rem;
-  }
 }
 
 @media (min-width: 1800px) {
