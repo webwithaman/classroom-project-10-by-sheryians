@@ -1,0 +1,294 @@
+/* Google Fonts Import */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Nunito:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* CSS Variables Start */
+:root {
+  /* Theme Colors */
+  --black: #000;
+  --white: #fff;
+
+  /* Theme Fonts */
+  --font-family-1: "Lato", sans-serif;
+  --font-family-2: "Poppins", sans-serif;
+  --font-family-3: "Oswald", sans-serif;
+  --font-family-4: "Ubuntu", sans-serif;
+  --font-family-5: "Roboto", sans-serif;
+  --font-family-6: "Nunito", sans-serif;
+  --font-family-7: "Gideon", sans-serif;
+}
+/* CSS Variables End */
+
+/* Reset Default Styles Start */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-family: var(--font-family-2);
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #f2f0f0;
+  /* background: url(https://4kwallpapers.com/images/wallpapers/colorful-background-gradient-background-5k-8k-2560x1080-8706.jpg);
+  background-size: cover; */
+  min-height: 100vh;
+}
+/* Reset Default Styles End */
+
+/* Common Styles for Frequently Used Elements Start */
+a {
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s linear;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.4;
+}
+
+p {
+  line-height: 1.6;
+}
+/* Common Styles for Frequently Used Elements End */
+
+/* Reusable Components & Utility Classes Start */
+/* Reusable Components & Utility Classes End */
+
+/* Page-Specific Styles Start */
+.site-wrapper {
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.boxes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block: 2rem;
+  gap: 2rem;
+}
+
+.boxes div {
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.068);
+  color: rgb(255, 255, 255);
+  padding: 1.2rem 1.6rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  text-transform: capitalize;
+  position: relative;
+  background-color: #e74c3c;
+}
+
+.boxes div:last-child {
+  background-color: #2ecc71;
+}
+
+.boxes div:last-child {
+  background-color: #2ecc71;
+}
+
+.boxes div span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  font-size: 1rem;
+  font-weight: 500;
+  place-content: center;
+  color: rgb(0, 0, 0);
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  padding: 0.4rem;
+  border-radius: 1rem;
+  background-color: rgb(255, 255, 255);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.091);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.card-body {
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.card:nth-child(1n) .card-body {
+  background-color: rgba(0, 183, 255, 0.13);
+}
+
+.card:nth-child(2n) .card-body {
+  background-color: rgba(255, 0, 144, 0.107);
+}
+
+.card:nth-child(3n) .card-body {
+  background-color: rgba(255, 191, 0, 0.247);
+}
+
+.card:nth-child(1n) .btns span {
+  background-color: rgba(0, 183, 255, 0.13);
+}
+
+.card:nth-child(2n) .btns span {
+  background-color: rgba(255, 0, 144, 0.107);
+}
+
+.card:nth-child(3n) .btns span {
+  background-color: rgba(255, 191, 0, 0.247);
+}
+
+.profile {
+  width: 7rem;
+  padding: 1rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.profile img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.title {
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: 450;
+  color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: "...";
+}
+
+.content {
+  width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: "...";
+  font-size: 1.2rem;
+  color: grey;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+}
+
+.btns div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btns span {
+  border-radius: 0.5rem;
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 0.7rem;
+  letter-spacing: 0.3px;
+}
+
+.delete,
+.mute,
+.read {
+  width: 2.3rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  /* background-color: #e74c3c; */
+  background-color: #d8d8d8;
+
+  color: rgb(0, 0, 0);
+  font-size: 1.4rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.delete {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background-color: white;
+}
+
+.mute {
+  /* background-color: #3498db; */
+}
+
+.read {
+  /* background-color: #2ecc71; */
+}
+/* Page-Specific Styles End */
+
+/* Keyframes for Animations Start */
+@keyframes animation-name {
+  /* Define your keyframes here */
+}
+/* Keyframes for Animations End */
