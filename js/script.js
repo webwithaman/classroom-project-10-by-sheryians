@@ -95,7 +95,7 @@ const actualNotifications = [
 const notifications = [...actualNotifications];
 
 var newNotificationSound = new Howl({
-  src: ["../assets/music/new-notification.mp3"],
+  src: ["../assets/sound/new-notification.mp3"],
   autoplay: false,
   loop: false,
   volume: 1,
@@ -108,17 +108,17 @@ notifications.length = Math.floor(
   Math.random() * (notifications.length + 1 - 3) + 3
 );
 
-let deleteNotificationSound = new Audio("../assets/music/delete.mp3");
-let readNotificationSound = new Audio("../assets/music/read.mp3");
-let muteNotificationSound = new Audio("../assets/music/mute.mp3");
+let deleteSound = new Audio("../assets/sound/delete.mp3");
+let readToggleSound = new Audio("../assets/sound/read-toggle.mp3");
+let muteToggleSound = new Audio("../assets/sound/mute-toggle.mp3");
 
 function displayCards() {
   let cards = "";
   notifications.forEach((data) => {
     cards += `
-  <div class="card" id='${data.id}'>
-      <div class="card-body" >
-          <i class="ri-delete-bin-3-fill delete" id="${data.id}"></i>
+  <div class="notification-card" id='${data.id}'>
+      <div class="notification-card-body" >
+          <i class="ri-delete-bin-3-fill delete-icon" id="${data.id}"></i>
 
         <div class="profile">
           <img src="${data.profilePic}" />
@@ -126,7 +126,7 @@ function displayCards() {
         <h5 class="title">${data.title}</h5>
         <p class="content">${data.content}</p>
         </div>
-        <div class="btns">
+        <div class="notification-card-footer">
           <div>
             <span>${data.isMuted ? "muted" : "unmuted"}</span>
             <span>${data.isRead ? "read" : "unread"}</span>
@@ -137,17 +137,17 @@ function displayCards() {
               data.isMuted
                 ? "ri-notification-off-fill"
                 : "ri-notification-4-fill"
-            }  mute" id="${data.id}"></i>
+            }  mute-toggle-icon" id="${data.id}"></i>
            <i class="${
              data.isRead ? "ri-mail-check-fill" : "ri-mail-unread-fill"
-           }    read" id="${data.id}"></i>
+           }    read-toggle-icon" id="${data.id}"></i>
           </div>
         </div>
       </div>
   `;
   });
   if (notifications.length === 0) cards = "No Data";
-  document.querySelector(".cards-container").innerHTML = cards;
+  document.querySelector(".notifications-container").innerHTML = cards;
   eventE();
 }
 
@@ -162,7 +162,7 @@ function t(u) {
 }
 
 function eventE() {
-  document.querySelectorAll(".card").forEach(function (c) {
+  document.querySelectorAll(".notification-card").forEach(function (c) {
     c.addEventListener("mouseover", function (e) {
       let index = t(+this.id);
       console.log(index);
@@ -178,19 +178,19 @@ function eventE() {
 }
 
 document
-  .querySelector(".cards-container")
+  .querySelector(".notifications-container")
   .addEventListener("click", function (e) {
-    if (e.target.classList.contains("delete")) {
+    if (e.target.classList.contains("delete-icon")) {
       notifications.splice(notifications[e.target.id], 1);
-      deleteNotificationSound.pause();
-      deleteNotificationSound.currentTime = 0;
-      deleteNotificationSound.play();
+      deleteSound.pause();
+      deleteSound.currentTime = 0;
+      deleteSound.play();
       displayCards();
       displayNot();
-    } else if (e.target.classList.contains("mute")) {
-      muteNotificationSound.pause();
-      muteNotificationSound.currentTime = 0;
-      muteNotificationSound.play();
+    } else if (e.target.classList.contains("mute-toggle-icon")) {
+      muteToggleSound.pause();
+      muteToggleSound.currentTime = 0;
+      muteToggleSound.play();
       let index = t(+e.target.id);
       console.log(index);
       if (e.target.classList.contains("ri-notification-4-fill"))
@@ -199,11 +199,11 @@ document
 
       displayCards();
       displayNot();
-    } else if (e.target.classList.contains("read")) {
+    } else if (e.target.classList.contains("read-toggle-icon")) {
       let index = t(+e.target.id);
-      readNotificationSound.pause();
-      readNotificationSound.currentTime = 0;
-      readNotificationSound.play();
+      readToggleSound.pause();
+      readToggleSound.currentTime = 0;
+      readToggleSound.play();
       if (e.target.classList.contains("ri-mail-unread-fill"))
         notifications[index].isRead = true;
       else notifications[index].isRead = false;
@@ -222,18 +222,18 @@ function displayNot() {
     return !e.isRead;
   }).length;
 
-  document.querySelector(".boxes").innerHTML = `
-    <div>
-          notifications
-          <span>${total}</span>
+  document.querySelector(".inbox-status-bar").innerHTML = `
+     <div class="inbox-status">
+          Total
+          <span class="inbox-count">10</span>
         </div>
-        <div>
+        <div class="inbox-status">
           unread
-          <span>${unread}</span>
+          <span class="inbox-count">10</span>
         </div>
-        <div>
+        <div class="inbox-status">
           new
-          <span>${newNot}</span>
+          <span class="inbox-count">10</span>
         </div>
   `;
 }

@@ -25,10 +25,10 @@
 }
 
 @media (min-width: 500px) {
-  .boxes div {
+  .inbox-status-bar .inbox-status {
     min-width: 10rem;
   }
-  .cards-container {
+  .notifications-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   }

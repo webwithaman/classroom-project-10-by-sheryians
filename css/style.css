@@ -47,7 +47,7 @@ body {
   word-spacing: 3px;
 }
 
-.boxes {
+.inbox-status-bar {
   padding: 2rem;
   width: fit-content;
   margin-inline: auto;
@@ -61,7 +61,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.137) inset;
 }
 
-.boxes div {
+.inbox-status-bar .inbox-status {
   background-color: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.21);
   color: rgb(255, 255, 255);
@@ -76,17 +76,17 @@ body {
   background-color: #ff432e;
 }
 
-.boxes div:first-child {
+.inbox-status-bar .inbox-status:first-child {
   background-color: #2e85cc;
   background-color: #095da1;
   background-color: #61b8ff;
 }
 
-.boxes div:last-child {
+.inbox-status-bar .inbox-status:last-child {
   background-color: #27e375;
 }
 
-.boxes div span {
+.inbox-status-bar .inbox-status .inbox-count {
   position: absolute;
   top: 0;
   right: 0;
@@ -103,13 +103,13 @@ body {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.26);
 }
 
-.cards-container {
+.notifications-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.card {
+.notification-card {
   padding: 0.6rem;
   padding: 2rem;
   border-radius: 1rem;
@@ -122,7 +122,7 @@ body {
   text-align: center;
 }
 
-.card-body {
+.notification-card-body {
   padding: 2rem;
   width: 100%;
   display: flex;
@@ -135,27 +135,27 @@ body {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.176);
 }
 
-.card:nth-child(1n) .card-body {
+.notification-card:nth-child(1n) .notification-card-body {
   background-color: rgba(0, 183, 255, 0.13);
 }
 
-.card:nth-child(2n) .card-body {
+.notification-card:nth-child(2n) .notification-card-body {
   background-color: rgba(255, 0, 144, 0.208);
 }
 
-.card:nth-child(3n) .card-body {
+.notification-card:nth-child(3n) .notification-card-body {
   background-color: rgba(255, 191, 0, 0.247);
 }
 
-.card:nth-child(1n) .btns span {
+.notification-card:nth-child(1n) .notification-card-footer span {
   background-color: rgba(0, 183, 255, 0.13);
 }
 
-.card:nth-child(2n) .btns span {
+.notification-card:nth-child(2n) .notification-card-footer span {
   background-color: rgba(255, 0, 144, 0.107);
 }
 
-.card:nth-child(3n) .btns span {
+.notification-card:nth-child(3n) .notification-card-footer span {
   background-color: rgba(255, 191, 0, 0.247);
 }
 
@@ -195,7 +195,7 @@ body {
   color: grey;
 }
 
-.btns {
+.notification-card-footer {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -203,12 +203,12 @@ body {
   padding: 2rem 0.3rem 0;
 }
 
-.btns div {
+.notification-card-footer div {
   display: flex;
   gap: 0.7rem;
 }
 
-.btns span {
+.notification-card-footer span {
   border-radius: 0.5rem;
   color: black;
   text-transform: uppercase;
@@ -221,9 +221,9 @@ body {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.196);
 }
 
-.delete,
-.mute,
-.read {
+.delete-icon,
+.mute-toggle-icon,
+.read-toggle-icon {
   width: 2.3rem;
   aspect-ratio: 1;
   display: grid;
@@ -239,16 +239,10 @@ body {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.285);
 }
 
-.delete {
+.delete-icon {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
   background-color: white;
 }
 /* Page-Specific Styles End */
-
-/* Keyframes for Animations Start */
-@keyframes animation-name {
-  /* Define your keyframes here */
-}
-/* Keyframes for Animations End */
