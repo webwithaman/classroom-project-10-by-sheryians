@@ -3,6 +3,12 @@
 
 /* CSS Variables Start */
 :root {
+  /* Theme Colors */
+  --theme-color-1: #f7f7f7;
+  --theme-color-2: rgba(255, 191, 0, 0.247);
+  --theme-color-3: rgba(255, 242, 0, 0.333);
+  --theme-color-4: rgba(0, 183, 255, 0.13);
+
   /* Theme Fonts */
   --primary-font: "Poppins", sans-serif;
 }
@@ -48,6 +54,44 @@ body {
   word-spacing: 4px;
 }
 
+.color-themes-box {
+  width: fit-content;
+  margin-inline: auto;
+  padding: 2.5rem;
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  background-color: #fff;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.137) inset;
+}
+
+.color-themes-box .color-picker {
+  width: 5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.color-themes-box .color-picker.selected-color {
+  border: 3px solid rgb(0, 0, 0);
+}
+
+.color-themes-box .color-picker:nth-child(1) {
+  background-color: var(--theme-color-1);
+}
+
+.color-themes-box .color-picker:nth-child(2) {
+  background-color: var(--theme-color-2);
+}
+
+.color-themes-box .color-picker:nth-child(3) {
+  background-color: var(--theme-color-3);
+}
+
+.color-themes-box .color-picker:nth-child(4) {
+  background-color: var(--theme-color-4);
+}
+
 /* Inbox Status Bar */
 .inbox-status-bar {
   width: 100%;
@@ -67,20 +111,20 @@ body {
   color: #fff;
   padding: 1.5rem;
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   letter-spacing: 0.4px;
-  font-weight: 450;
+  font-weight: 500;
   text-transform: uppercase;
   position: relative;
-  background-color: #61b8ff;
+  background-color: #2da0ff;
 }
 
 .inbox-status-bar .inbox-status:nth-child(2) {
-  background-color: #ff4141;
+  background-color: #ff1919;
 }
 
 .inbox-status-bar .inbox-status:nth-child(3) {
-  background-color: #27e375;
+  background-color: rgb(1, 206, 1);
 }
 
 .inbox-status-bar .inbox-status .inbox-count {
@@ -208,13 +252,13 @@ body {
   letter-spacing: 0.3px;
 }
 
-.notif-card:has(.new-label) {
-  animation: animate-new-notif 1s linear infinite alternate;
+.notif-card-footer .new-label {
+  animation: animate-new-label 1s linear infinite alternate;
 }
 
-@keyframes animate-new-notif {
+@keyframes animate-new-label {
   100% {
-    transform: scale(1.02);
+    transform: scale(1.13);
   }
 }
 

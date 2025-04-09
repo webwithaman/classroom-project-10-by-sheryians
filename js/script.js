@@ -320,3 +320,37 @@ setInterval(() => {
     updateDOMandUI();
   }
 }, 8000);
+
+document
+  .querySelector(".color-themes-box")
+  .addEventListener("click", (event) => {
+    let targetElement = event.target;
+    if (targetElement.classList.contains("color-picker")) {
+      for (let element of document.querySelectorAll(".color-picker"))
+        element.classList.remove("selected-color");
+
+      targetElement.classList.add("selected-color");
+      document.body.style.backgroundColor =
+        getComputedStyle(targetElement).backgroundColor;
+
+      localStorage.setItem(
+        "theme-color",
+        getComputedStyle(targetElement).backgroundColor
+      );
+    }
+  });
+
+console.log(localStorage.getItem("theme-color"));
+
+document.body.style.backgroundColor = localStorage.getItem("theme-color");
+
+for (let element of document.querySelectorAll(".color-picker"))
+  element.classList.remove("selected-color");
+
+for (let element of document.querySelectorAll(".color-picker")) {
+  if (
+    getComputedStyle(element).backgroundColor ===
+    localStorage.getItem("theme-color")
+  )
+    element.classList.add("selected-color");
+}
