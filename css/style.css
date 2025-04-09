@@ -25,7 +25,6 @@ html {
 
 body {
   overflow-x: hidden;
-  background-color: #f4f4f4;
   background-color: #f7f7f7;
   min-height: 100vh;
 }
@@ -33,56 +32,54 @@ body {
 
 /* Page-Specific Styles Start */
 .site-wrapper {
-  padding: 2rem;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
+/* Primary Heading */
 .primary-heading {
   font-size: 3rem;
   font-weight: 600;
-  text-transform: capitalize;
-  letter-spacing: 0.3px;
-  margin-bottom: 2rem;
+  text-transform: uppercase;
   text-align: center;
   color: rgb(0, 0, 0);
-  word-spacing: 3px;
+  word-spacing: 4px;
 }
 
+/* Inbox Status Bar */
 .inbox-status-bar {
-  padding: 2rem;
-  width: fit-content;
-  margin-inline: auto;
+  width: 100%;
+  padding: 2.5rem;
   display: flex;
+  gap: 2.5rem;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  margin-block: 2rem;
-  gap: 2rem;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.137) inset;
+  background-color: #fff;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.137) inset;
 }
 
 .inbox-status-bar .inbox-status {
-  background-color: white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.21);
-  color: rgb(255, 255, 255);
-  padding: 1.4rem;
-  min-width: 100%;
+  flex: 1 1 15rem;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.21);
+  color: #fff;
+  padding: 1.5rem;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   letter-spacing: 0.4px;
   font-weight: 450;
-  text-transform: capitalize;
+  text-transform: uppercase;
   position: relative;
-  background-color: #ff432e;
-}
-
-.inbox-status-bar .inbox-status:first-child {
-  background-color: #2e85cc;
-  background-color: #095da1;
   background-color: #61b8ff;
 }
 
-.inbox-status-bar .inbox-status:last-child {
+.inbox-status-bar .inbox-status:nth-child(2) {
+  background-color: #ff4141;
+}
+
+.inbox-status-bar .inbox-status:nth-child(3) {
   background-color: #27e375;
 }
 
@@ -92,70 +89,76 @@ body {
   right: 0;
   transform: translate(50%, -50%);
   border-radius: 50%;
-  background-color: rgb(255, 255, 255);
+  background-color: #fff;
   width: 2rem;
   height: 2rem;
   display: grid;
+  place-content: center;
   font-size: 1rem;
   font-weight: 500;
-  place-content: center;
-  color: rgb(0, 0, 0);
+  color: #000000;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.26);
 }
 
-.notifications-container {
+/* Notifications Container */
+.notifs-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
-.notification-card {
-  padding: 0.6rem;
-  padding: 2rem;
-  border-radius: 1rem;
-  background-color: rgb(255, 255, 255);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.176) inset;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.no-notifs-heading {
+  text-align: center;
+  font-size: 2.4rem;
+  text-transform: capitalize;
+  font-weight: 500;
+  color: rgb(95, 95, 95);
+}
+
+.notif-card {
+  padding: 2.5rem;
+  background-color: #fff;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.176) inset;
   text-align: center;
 }
 
-.notification-card-body {
-  padding: 2rem;
+.notif-card-body {
+  padding: 2.5rem;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  text-align: center;
-  border-radius: 1rem;
   position: relative;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.176);
 }
 
-.notification-card:nth-child(1n) .notification-card-body {
+.delete-icon {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.notif-card:nth-child(1n) .notif-card-body {
   background-color: rgba(0, 183, 255, 0.13);
 }
 
-.notification-card:nth-child(2n) .notification-card-body {
+.notif-card:nth-child(2n) .notif-card-body {
   background-color: rgba(255, 0, 144, 0.208);
 }
 
-.notification-card:nth-child(3n) .notification-card-body {
+.notif-card:nth-child(3n) .notif-card-body {
   background-color: rgba(255, 191, 0, 0.247);
 }
 
-.notification-card:nth-child(1n) .notification-card-footer span {
+.notif-card:nth-child(1n) .notif-card-footer span {
   background-color: rgba(0, 183, 255, 0.13);
 }
 
-.notification-card:nth-child(2n) .notification-card-footer span {
+.notif-card:nth-child(2n) .notif-card-footer span {
   background-color: rgba(255, 0, 144, 0.107);
 }
 
-.notification-card:nth-child(3n) .notification-card-footer span {
+.notif-card:nth-child(3n) .notif-card-footer span {
   background-color: rgba(255, 191, 0, 0.247);
 }
 
@@ -165,8 +168,6 @@ body {
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
-  position: relative;
-  z-index: 1;
 }
 
 .profile img {
@@ -177,17 +178,16 @@ body {
 }
 
 .title {
-  width: 100%;
   font-size: 1.5rem;
   font-weight: 450;
-  color: #000000;
+  color: #000;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: "...";
 }
 
 .content {
-  width: 70%;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: "...";
@@ -195,30 +195,35 @@ body {
   color: grey;
 }
 
-.notification-card-footer {
+.notif-card-footer {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  gap: 0.5rem;
-  padding: 2rem 0.3rem 0;
+  padding-top: 2.5rem;
 }
 
-.notification-card-footer div {
+.notif-card-footer div {
   display: flex;
-  gap: 0.7rem;
+  gap: 0.8rem;
 }
 
-.notification-card-footer span {
-  border-radius: 0.5rem;
-  color: black;
+.notif-card-footer .label {
+  color: #000000;
   text-transform: uppercase;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-inline: 0.7rem;
+  display: grid;
+  place-content: center;
+  padding-inline: 1rem;
   letter-spacing: 0.3px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.196);
+}
+
+.notif-card:has(.new-label) {
+  animation: animate-new-notif 1s linear infinite alternate;
+}
+
+@keyframes animate-new-notif {
+  100% {
+    transform: scale(1.02);
+  }
 }
 
 .delete-icon,
@@ -228,21 +233,11 @@ body {
   aspect-ratio: 1;
   display: grid;
   place-items: center;
-  /* background-color: #e74c3c; */
-  background-color: #d8d8d8;
-  background-color: #ffffff;
-
-  color: rgb(0, 0, 0);
+  background-color: #fff;
+  color: #000;
   font-size: 1.4rem;
-  border-radius: 0.2rem;
   cursor: pointer;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.285);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.285);
 }
 
-.delete-icon {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background-color: white;
-}
 /* Page-Specific Styles End */

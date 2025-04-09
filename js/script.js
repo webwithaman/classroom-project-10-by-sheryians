@@ -1,5 +1,5 @@
-// Notifications
-const actualNotifications = [
+// All Notifications
+const allNotifs = [
   {
     id: 1,
     profilePic: "../assets/images/profile-pic-1.jpg",
@@ -11,7 +11,7 @@ const actualNotifications = [
   },
   {
     id: 2,
-    profilePic: "../assets/images/profile-pic-7.jpg",
+    profilePic: "../assets/images/profile-pic-2.jpg",
     title: "GitHub: PR Review Needed",
     content: "You were requested to review Pull Request #42 in react-app repo.",
     isRead: false,
@@ -72,65 +72,57 @@ const actualNotifications = [
     isMuted: false,
     isNew: true,
   },
-  {
-    id: 9,
-    profilePic: "../assets/images/profile-pic-4.jpg",
-    title: "Meeting Reminder",
-    content: "Daily Standup with Dev Team in 15 minutes.",
-    isRead: false,
-    isMuted: false,
-    isNew: true,
-  },
-  {
-    id: 10,
-    profilePic: "../assets/images/profile-pic-6.jpg",
-    title: "Gmail: New Mail from HR",
-    content: "Your interview is scheduled for Tuesday at 11:00 AM.",
-    isRead: false,
-    isMuted: false,
-    isNew: true,
-  },
 ];
 
-const notifications = [...actualNotifications];
+allNotifs.length = 4;
 
-var newNotificationSound = new Howl({
-  src: ["../assets/sound/new-notification.mp3"],
-  autoplay: false,
-  loop: false,
+// Copying Notifications to Display
+const displayedNotifs = JSON.parse(JSON.stringify(allNotifs));
+
+// Sound Effects
+const deleteSound = new Audio("../assets/sound/delete.mp3");
+const readToggleSound = new Audio("../assets/sound/read-toggle.mp3");
+const muteToggleSound = new Audio("../assets/sound/mute-toggle.mp3");
+const newNotifSound = new Howl({
+  src: ["../assets/sound/new-notif.mp3"],
   volume: 1,
-  onend: function () {
-    console.log("Finished playing!");
-  },
 });
 
-notifications.length = Math.floor(
-  Math.random() * (notifications.length + 1 - 3) + 3
+// Minimum Notifications to Display
+const minNotifsToDisplay = 2;
+
+// Randomly Choosing N Notifications to Display
+displayedNotifs.length = Math.floor(
+  Math.random() * (allNotifs.length + 1 - minNotifsToDisplay) +
+    minNotifsToDisplay
 );
 
-let deleteSound = new Audio("../assets/sound/delete.mp3");
-let readToggleSound = new Audio("../assets/sound/read-toggle.mp3");
-let muteToggleSound = new Audio("../assets/sound/mute-toggle.mp3");
+// Function to Display Notification Cards
+const displayNotifCards = () => {
+  let notifCards = "";
 
-function displayCards() {
-  let cards = "";
-  notifications.forEach((data) => {
-    cards += `
-  <div class="notification-card" id='${data.id}'>
-      <div class="notification-card-body" >
-          <i class="ri-delete-bin-3-fill delete-icon" id="${data.id}"></i>
+  // Traverse Over Displayed Notifications & Make Notification Card
+  displayedNotifs.forEach((data) => {
+    notifCards += `
+    <div class="notif-card" id='${data.id}'>
+      <div class="notif-card-body" >
+        <i class="ri-delete-bin-3-fill delete-icon" id="${data.id}"></i>
 
         <div class="profile">
           <img src="${data.profilePic}" />
         </div>
         <h5 class="title">${data.title}</h5>
         <p class="content">${data.content}</p>
-        </div>
-        <div class="notification-card-footer">
+      </div>
+      <div class="notif-card-footer">
           <div>
-            <span>${data.isMuted ? "muted" : "unmuted"}</span>
-            <span>${data.isRead ? "read" : "unread"}</span>
-            ${data.isNew ? `<span class='new' id='${data.id}'>new</span>` : ""}
+            <span class="label">${data.isMuted ? "muted" : "unmuted"}</span>
+            <span class="label">${data.isRead ? "read" : "unread"}</span>
+            ${
+              data.isNew
+                ? `<span class='label new-label' id='${data.id}'>new</span>`
+                : ""
+            }
           </div>
           <div>
             <i class=" ${
@@ -138,129 +130,170 @@ function displayCards() {
                 ? "ri-notification-off-fill"
                 : "ri-notification-4-fill"
             }  mute-toggle-icon" id="${data.id}"></i>
-           <i class="${
-             data.isRead ? "ri-mail-check-fill" : "ri-mail-unread-fill"
-           }    read-toggle-icon" id="${data.id}"></i>
+            <i class="${
+              data.isRead ? "ri-mail-check-fill" : "ri-mail-unread-fill"
+            }    read-toggle-icon" id="${data.id}"></i>
           </div>
-        </div>
       </div>
+    </div>
   `;
   });
-  if (notifications.length === 0) cards = "No Data";
-  document.querySelector(".notifications-container").innerHTML = cards;
-  eventE();
-}
 
-let newNot = notifications.length;
+  // If There is no Notifications to Display
+  if (displayedNotifs.length === 0)
+    notifCards = "<h2 class='no-notifs-heading'>No notifications yet 🔕</h2>";
 
-displayCards();
+  // Inserting Notification Cards to Notifications Container
+  document.querySelector(".notifs-container").innerHTML = notifCards;
+};
 
-function t(u) {
-  return notifications.findIndex(function (e) {
-    return e.id === u;
-  });
-}
+// Function to Display Inbox Status Bar Details
+const displayInboxStatusDetails = () => {
+  // Find Number of Unread Notifications
+  let unreadNotifs = displayedNotifs.filter(function (notif) {
+    return !notif.isRead;
+  }).length;
 
-function eventE() {
-  document.querySelectorAll(".notification-card").forEach(function (c) {
-    c.addEventListener("mouseover", function (e) {
-      let index = t(+this.id);
-      console.log(index);
-      if (notifications[index].isNew) {
-        actualNotifications[index].isNew = false;
-        notifications[index].isNew = false;
-        newNot--;
-        displayNot();
-        displayCards();
-      }
-    });
-  });
-}
-
-document
-  .querySelector(".notifications-container")
-  .addEventListener("click", function (e) {
-    if (e.target.classList.contains("delete-icon")) {
-      notifications.splice(notifications[e.target.id], 1);
-      deleteSound.pause();
-      deleteSound.currentTime = 0;
-      deleteSound.play();
-      displayCards();
-      displayNot();
-    } else if (e.target.classList.contains("mute-toggle-icon")) {
-      muteToggleSound.pause();
-      muteToggleSound.currentTime = 0;
-      muteToggleSound.play();
-      let index = t(+e.target.id);
-      console.log(index);
-      if (e.target.classList.contains("ri-notification-4-fill"))
-        notifications[index].isMuted = true;
-      else notifications[index].isMuted = false;
-
-      displayCards();
-      displayNot();
-    } else if (e.target.classList.contains("read-toggle-icon")) {
-      let index = t(+e.target.id);
-      readToggleSound.pause();
-      readToggleSound.currentTime = 0;
-      readToggleSound.play();
-      if (e.target.classList.contains("ri-mail-unread-fill"))
-        notifications[index].isRead = true;
-      else notifications[index].isRead = false;
-
-      displayCards();
-      displayNot();
-    }
-  });
-
-displayNot();
-
-function displayNot() {
-  let total = notifications.length;
-
-  let unread = notifications.filter(function (e) {
-    return !e.isRead;
+  // Find Number of New Notifications
+  let newNotifs = displayedNotifs.filter(function (notif) {
+    return notif.isNew;
   }).length;
 
   document.querySelector(".inbox-status-bar").innerHTML = `
-     <div class="inbox-status">
-          Total
-          <span class="inbox-count">10</span>
+        <div class="inbox-status">
+          TOTAL
+          <span class="inbox-count">${displayedNotifs.length}</span>
         </div>
         <div class="inbox-status">
-          unread
-          <span class="inbox-count">10</span>
+          UNREAD
+          <span class="inbox-count">${unreadNotifs}</span>
         </div>
         <div class="inbox-status">
-          new
-          <span class="inbox-count">10</span>
+          NEW
+          <span class="inbox-count">${newNotifs}</span>
         </div>
   `;
-}
+};
 
-setInterval(function () {
-  let diff = actualNotifications.length - notifications.length;
+// Function to Find Index of the Notification Object Having Given Id
+const findIndexOfNotif = (id) => {
+  return displayedNotifs.findIndex((notif) => {
+    return notif.id === id;
+  });
+};
 
-  if (diff) {
-    let n = Math.floor(Math.random() * (diff + 1 - 1) + 1);
-    newNot += n;
-    let i = notifications.length;
+// Function to Delete Notification from displayedNotif & Update DOM & UI
+const deleteNotif = (id) => {
+  // Delete Notification Objejct from displayedNotif
+  displayedNotifs.splice(displayedNotifs[id], 1);
 
-    while (i < notifications.length + n) {
-      actualNotifications[i].isNew = true;
-      i++;
+  // Play Delete Sound
+  deleteSound.pause();
+  deleteSound.currentTime = 0;
+  deleteSound.play();
+
+  // Update DOM & UI
+  updateDOMandUI();
+};
+
+// Function to Mute Toggle Notification & Update DOM & UI
+const muteToggleNotif = (id) => {
+  // Play Mute Toggle Sound
+  muteToggleSound.pause();
+  muteToggleSound.currentTime = 0;
+  muteToggleSound.play();
+
+  // Find Index of the Notification Object Having Given Id
+  let index = findIndexOfNotif(id);
+
+  // If Notification is Muted then Unmute It & Vice versa
+  displayedNotifs[index].isMuted = displayedNotifs[index].isMuted
+    ? false
+    : true;
+
+  // Update DOM & UI
+  updateDOMandUI();
+};
+
+// Function to Read Toggle Notification & Update DOM & UI
+const readToggleNotif = (id) => {
+  // Play Mute Toggle Sound
+  readToggleSound.pause();
+  readToggleSound.currentTime = 0;
+  readToggleSound.play();
+
+  // Find Index of the Notification Object Having Given Id
+  let index = findIndexOfNotif(id);
+
+  // If Notification is Read then Make It Unread and Vice versa
+  displayedNotifs[index].isRead = displayedNotifs[index].isRead ? false : true;
+
+  // Update DOM & UI
+  updateDOMandUI();
+};
+
+// Function to Add Mouse Over Event on Notification Cards to Perform Action When Hovering on Notification Card Having New Label (New Notification) Using Event Bubbling
+const addMouseOverEventOnNotifCards = () => {
+  document.querySelectorAll(".notif-card").forEach((element) => {
+    element.addEventListener("mouseover", (event) => {
+      let index = findIndexOfNotif(+event.currentTarget.id);
+      if (displayedNotifs[index].isNew) {
+        displayedNotifs[index].isNew = false;
+        updateDOMandUI();
+      }
+    });
+  });
+};
+
+// Function to Update DOM & UI
+const updateDOMandUI = () => {
+  // Display Notifcation Cards
+  displayNotifCards();
+
+  // Display Inbox Statsi Bar Details
+  displayInboxStatusDetails();
+
+  // Adding Mouseover Event
+  addMouseOverEventOnNotifCards();
+};
+
+// Display Notification Cards & Inbox Status Bar Details On Page Load
+window.onload = updateDOMandUI;
+
+// Getting Notification Container to Add Click Event on It and Perform Actions When Clicking on Delete, Mute Toggle & Read Toggle Icon Using Event Bubbling
+document
+  .querySelector(".notifs-container")
+  .addEventListener("click", function (event) {
+    // Target Element (Element that Triggered the Event)
+    let targetElement = event.target;
+
+    if (targetElement.classList.contains("delete-icon"))
+      deleteNotif(+targetElement.id);
+    else if (targetElement.classList.contains("mute-toggle-icon"))
+      muteToggleNotif(+targetElement.id);
+    else if (targetElement.classList.contains("read-toggle-icon"))
+      readToggleNotif(+targetElement.id);
+  });
+
+// Push Some Notifications After Every 5 Seconds
+setInterval(() => {
+  const minNewNotifs = 1,
+    maxNewNotifs = allNotifs.length - displayedNotifs.length;
+
+  if (maxNewNotifs) {
+    newNotifSound.play();
+
+    let numOfNewNotifs = Math.floor(
+      Math.random() * (maxNewNotifs + 1 - minNewNotifs) + minNewNotifs
+    );
+
+    for (let i = 0; i < allNotifs.length && numOfNewNotifs; i++) {
+      if (!displayedNotifs.includes(allNotifs[i])) {
+        displayedNotifs.push({ ...allNotifs[i] });
+        numOfNewNotifs--;
+      }
     }
-    i = notifications.length;
 
-    newNotificationSound.currentTime = 0;
-    newNotificationSound.play();
-    while (n) {
-      notifications.splice(i, 0, actualNotifications[i]);
-      n--;
-      i++;
-    }
-
-    displayCards();
-    displayNot();
+    updateDOMandUI();
   }
-}, 8000);
+}, 2000);

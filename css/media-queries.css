@@ -28,9 +28,14 @@
   .inbox-status-bar .inbox-status {
     min-width: 10rem;
   }
-  .notifications-container {
+
+  .notifs-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  }
+
+  .no-notifs-heading {
+    grid-column: 1/-1;
   }
 }
 
