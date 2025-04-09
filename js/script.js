@@ -72,9 +72,25 @@ const allNotifs = [
     isMuted: false,
     isNew: true,
   },
+  {
+    id: 9,
+    profilePic: "../assets/images/profile-pic-9.jpg",
+    title: "Comment on Your Post",
+    content: "John Doe Recently Commented on Your 29",
+    isRead: false,
+    isMuted: false,
+    isNew: true,
+  },
+  {
+    id: 10,
+    profilePic: "../assets/images/profile-pic-10.jpg",
+    title: "You got 48 Reactions",
+    content: "Your Recent Post got 48 Reactions in Last 6 Hr",
+    isRead: false,
+    isMuted: false,
+    isNew: true,
+  },
 ];
-
-allNotifs.length = 4;
 
 // Copying Notifications to Display
 const displayedNotifs = JSON.parse(JSON.stringify(allNotifs));
@@ -184,8 +200,11 @@ const findIndexOfNotif = (id) => {
 
 // Function to Delete Notification from displayedNotif & Update DOM & UI
 const deleteNotif = (id) => {
+  // Find Index of the Notification Object Having Given Id
+  let index = findIndexOfNotif(id);
+
   // Delete Notification Objejct from displayedNotif
-  displayedNotifs.splice(displayedNotifs[id], 1);
+  displayedNotifs.splice(index, 1);
 
   // Play Delete Sound
   deleteSound.pause();
@@ -288,12 +307,16 @@ setInterval(() => {
     );
 
     for (let i = 0; i < allNotifs.length && numOfNewNotifs; i++) {
-      if (!displayedNotifs.includes(allNotifs[i])) {
-        displayedNotifs.push({ ...allNotifs[i] });
-        numOfNewNotifs--;
-      }
+      let j;
+      for (j = 0; j < displayedNotifs.length; j++)
+        if (displayedNotifs[j].id === allNotifs[i].id) break;
+
+      if (j !== displayedNotifs.length) continue;
+
+      displayedNotifs.push({ ...allNotifs[i] });
+      numOfNewNotifs--;
     }
 
     updateDOMandUI();
   }
-}, 2000);
+}, 8000);

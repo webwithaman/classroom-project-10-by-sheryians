@@ -138,28 +138,20 @@ body {
   right: 1.5rem;
 }
 
-.notif-card:nth-child(1n) .notif-card-body {
+.notif-card:nth-child(n) :is(.notif-card-body, .notif-card-footer span) {
   background-color: rgba(0, 183, 255, 0.13);
 }
 
-.notif-card:nth-child(2n) .notif-card-body {
-  background-color: rgba(255, 0, 144, 0.208);
+.notif-card:nth-child(2n) :is(.notif-card-body, .notif-card-footer span) {
+  background-color: rgba(255, 242, 0, 0.333);
 }
 
-.notif-card:nth-child(3n) .notif-card-body {
+.notif-card:nth-child(3n) :is(.notif-card-body, .notif-card-footer span) {
   background-color: rgba(255, 191, 0, 0.247);
 }
 
-.notif-card:nth-child(1n) .notif-card-footer span {
-  background-color: rgba(0, 183, 255, 0.13);
-}
-
-.notif-card:nth-child(2n) .notif-card-footer span {
-  background-color: rgba(255, 0, 144, 0.107);
-}
-
-.notif-card:nth-child(3n) .notif-card-footer span {
-  background-color: rgba(255, 191, 0, 0.247);
+.notif-card:nth-child(4n) :is(.notif-card-body, .notif-card-footer span) {
+  background-color: rgba(255, 0, 128, 0.119);
 }
 
 .profile {
