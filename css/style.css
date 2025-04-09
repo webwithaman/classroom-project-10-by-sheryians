@@ -258,7 +258,7 @@ body {
 
 @keyframes animate-new-label {
   100% {
-    transform: scale(1.13);
+    transform: scale(1.15);
   }
 }
 
