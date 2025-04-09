@@ -340,8 +340,6 @@ document
     }
   });
 
-console.log(localStorage.getItem("theme-color"));
-
 document.body.style.backgroundColor = localStorage.getItem("theme-color");
 
 for (let element of document.querySelectorAll(".color-picker"))
