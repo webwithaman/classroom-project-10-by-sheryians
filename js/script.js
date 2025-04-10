@@ -277,7 +277,7 @@ const updateDOMandUI = () => {
 };
 
 // Display Notification Cards & Inbox Status Bar Details On Page Load
-window.onload = updateDOMandUI;
+window.addEventListener("load", updateDOMandUI);
 
 // Getting Notification Container to Add Click Event on It and Perform Actions When Clicking on Delete, Mute Toggle & Read Toggle Icon Using Event Bubbling
 document
@@ -321,6 +321,34 @@ setInterval(() => {
   }
 }, 8000);
 
+const saveThemeColorToLocalStor = () => {
+  // localStorage.setItem(
+  //   "theme-color",
+  //   getComputedStyle(document.querySelector(".selected-color")).backgroundColor
+  // );
+};
+
+const getThemeColorAndSet = () => {
+  let savedThemeColor = localStorage.getItem("theme-color");
+
+  if (savedThemeColor) {
+    document.body.style.backgroundColor = savedThemeColor;
+
+    let colorPickers = document.querySelectorAll(".color-picker");
+
+    for (let element of colorPickers)
+      element.classList.remove("selected-color");
+
+    for (let element of colorPickers)
+      if (getComputedStyle(element).backgroundColor === savedThemeColor)
+        element.classList.add("selected-color");
+  } else
+    document
+      .querySelector(".color-picker:first-child")
+      .classList.add("selected-color");
+};
+
+// Adding Click Event on Color Themes Box to Change Color Themes
 document
   .querySelector(".color-themes-box")
   .addEventListener("click", (event) => {
@@ -330,25 +358,17 @@ document
         element.classList.remove("selected-color");
 
       targetElement.classList.add("selected-color");
+
       document.body.style.backgroundColor =
         getComputedStyle(targetElement).backgroundColor;
-
-      localStorage.setItem(
-        "theme-color",
-        getComputedStyle(targetElement).backgroundColor
-      );
     }
   });
 
-document.body.style.backgroundColor = localStorage.getItem("theme-color");
+window.addEventListener("load", getThemeColorAndSet);
 
-for (let element of document.querySelectorAll(".color-picker"))
-  element.classList.remove("selected-color");
-
-for (let element of document.querySelectorAll(".color-picker")) {
-  if (
-    getComputedStyle(element).backgroundColor ===
-    localStorage.getItem("theme-color")
-  )
-    element.classList.add("selected-color");
-}
+window.onbeforeunload = function () {
+  localStorage.setItem(
+    "theme-color",
+    getComputedStyle(document.querySelector(".selected-color")).backgroundColor
+  );
+};
