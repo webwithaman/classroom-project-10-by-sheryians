@@ -321,13 +321,6 @@ setInterval(() => {
   }
 }, 8000);
 
-const saveThemeColorToLocalStor = () => {
-  // localStorage.setItem(
-  //   "theme-color",
-  //   getComputedStyle(document.querySelector(".selected-color")).backgroundColor
-  // );
-};
-
 const getThemeColorAndSet = () => {
   let savedThemeColor = localStorage.getItem("theme-color");
 
